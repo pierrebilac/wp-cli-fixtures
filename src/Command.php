@@ -13,6 +13,7 @@ use WP_CLI_Command;
 
 class Command extends WP_CLI_Command
 {
+    protected static $base_path = 'fixtures';
     /**
      * Loads and save fixtures.
      *
@@ -27,7 +28,7 @@ class Command extends WP_CLI_Command
      */
     public function load($args, $assoc_args)
     {
-        $file = isset($assoc_args['file']) ? $assoc_args['file'] : 'fixtures.yml';
+        $file = isset($assoc_args['file']) ? sprintf('%s/%s', self::$base_path, $assoc_args['file']) : sprintf('%s/data.yml', self::$base_path);
         if (!is_file($file)) {
             WP_CLI::error(sprintf('Fixture file %s has not been found.', $file));
         }
