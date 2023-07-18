@@ -22,7 +22,15 @@ class Command extends WP_CLI_Command
         if ($page) {
             update_option('page_on_front', $page->ID);
             update_option('show_on_front', 'page');
+
+             WP_CLI::success('Home page updated');
+
+            return;
         }
+
+        WP_CLI::error('Home page not found');
+
+        return;
     }
 
     /**
