@@ -13,6 +13,18 @@ use WP_CLI_Command;
 
 class Command extends WP_CLI_Command
 {
+    protected static string $homePageSlug = 'accueil';
+
+    public function updateHome(): void
+    {
+        $page = get_page_by_path(self::$homePageSlug);
+
+        if ($page) {
+            update_option('page_on_front', $page->ID);
+            update_option('show_on_front', 'page');
+        }
+    }
+
     /**
      * Loads and save fixtures.
      *
